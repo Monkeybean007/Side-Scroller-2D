@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -20,6 +21,13 @@ public class GameOverManager : MonoBehaviour
         {
             // Player has died.
             ShowGameOver();
+
+            // Check for button press, for example, the "R" key
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                // Call the Restart method
+                RestartGame();
+            }
         }
     }
 
@@ -27,5 +35,14 @@ public class GameOverManager : MonoBehaviour
     {
         // Show the "Game Over" message.
         gameOverText.gameObject.SetActive(true);
+    }
+
+    void RestartGame()
+    {
+        // Get the current scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Reload the current scene
+        SceneManager.LoadScene(currentSceneIndex);
     }
 }
